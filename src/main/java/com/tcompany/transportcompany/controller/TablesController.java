@@ -2,8 +2,17 @@ package com.tcompany.transportcompany.controller;
 
 
 import com.tcompany.transportcompany.entity.Cargo;
+import com.tcompany.transportcompany.entity.Drivers;
+import com.tcompany.transportcompany.entity.Trailers;
+import com.tcompany.transportcompany.entity.Trucks;
 import com.tcompany.transportcompany.links.CargoLinks;
+import com.tcompany.transportcompany.links.DriversLinks;
+import com.tcompany.transportcompany.links.TrailersLinks;
+import com.tcompany.transportcompany.links.TrucksLinks;
 import com.tcompany.transportcompany.repository.CargoRepository;
+import com.tcompany.transportcompany.repository.DriversRepository;
+import com.tcompany.transportcompany.repository.TrailersRepository;
+import com.tcompany.transportcompany.repository.TrucksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -22,6 +30,12 @@ public class TablesController {
 
     @Autowired
     private CargoRepository cargoRepository;
+    @Autowired
+    private DriversRepository driversRepository;
+    @Autowired
+    private TrucksRepository trucksRepository;
+    @Autowired
+    private TrailersRepository trailersRepository;
 
     // Cargo
     @GetMapping(path = CargoLinks.GET_CARGO)
@@ -52,10 +66,111 @@ public class TablesController {
     }
 
     @DeleteMapping(path = CargoLinks.DELETE_CARGO)
-
     public ResponseEntity<?> deleteCargo(@RequestBody Cargo cargo) {
         String id = cargo.getId();
         cargoRepository.deleteById(id);
+        return ResponseEntity.ok(id);
+    }
+
+    // Drivers
+    @GetMapping(path = DriversLinks.GET_DRIVERS)
+    public ResponseEntity<?> getDrivers() {
+        List<Drivers> resource = driversRepository.findAll();
+        return ResponseEntity.ok(resource);
+    }
+
+    @PostMapping(path = DriversLinks.POST_DRIVER)
+    public ResponseEntity<?> postDriver(@RequestBody Drivers driver) {
+        Drivers resource = driversRepository.insert(driver);
+        return ResponseEntity.ok(resource);
+    }
+
+    @PutMapping(path = DriversLinks.PUT_DRIVER)
+    public ResponseEntity<?> putDriver(@RequestBody Drivers newDriver) {
+        Drivers driver = driversRepository.findById(newDriver.getId())
+                .orElseThrow(() -> new RuntimeException(
+                        String.format("Cannot Find Driver by ID %s", newDriver.getId())));
+
+        driver.setName(newDriver.getName());
+        driver.setSurname(newDriver.getSurname());
+
+        driversRepository.save(driver);
+        return ResponseEntity.ok(driver);
+    }
+
+    @DeleteMapping(path = DriversLinks.DELETE_DRIVER)
+    public ResponseEntity<?> deleteDriver(@RequestBody Drivers driver) {
+        String id = driver.getId();
+        driversRepository.deleteById(id);
+
+        return ResponseEntity.ok(id);
+    }
+
+    // Trucks
+    @GetMapping(path = TrucksLinks.GET_TRUCKS)
+    public ResponseEntity<?> getTrucks() {
+        List<Trucks> resource = trucksRepository.findAll();
+        return ResponseEntity.ok(resource);
+    }
+
+    @PostMapping(path = TrucksLinks.POST_TRUCK)
+    public ResponseEntity<?> postTruck(@RequestBody Trucks truck) {
+        Trucks resource = trucksRepository.insert(truck);
+        return ResponseEntity.ok(resource);
+    }
+
+    @PutMapping(path = TrucksLinks.PUT_TRUCK)
+    public ResponseEntity<?> putTruck(@RequestBody Trucks newTruck) {
+        Trucks truck = trucksRepository.findById(newTruck.getId())
+                .orElseThrow(() -> new RuntimeException(
+                        String.format("Cannot Find Truck by ID %s", newTruck.getId())));
+
+        truck.setModel(newTruck.getModel());
+        truck.setDriver(newTruck.getDriver());
+        truck.setLocation(newTruck.getLocation());
+
+        trucksRepository.save(truck);
+        return ResponseEntity.ok(truck);
+    }
+
+    @DeleteMapping(path = TrucksLinks.DELETE_TRUCK)
+    public ResponseEntity<?> deleteTruck(@RequestBody Trucks truck) {
+        String id = truck.getId();
+        trucksRepository.deleteById(id);
+        return ResponseEntity.ok(id);
+    }
+
+    // Trailers
+    @GetMapping(path = TrailersLinks.GET_TRAILERS)
+    public ResponseEntity<?> getTrailers() {
+        List<Trailers> resource = trailersRepository.findAll();
+        return ResponseEntity.ok(resource);
+    }
+
+    @PostMapping(path = TrailersLinks.POST_TRAILER)
+    public ResponseEntity<?> postTrailer(@RequestBody Trailers trailer) {
+        Trailers resource = trailersRepository.insert(trailer);
+        return ResponseEntity.ok(resource);
+    }
+
+    @PutMapping(path = TrailersLinks.PUT_TRAILER)
+    public ResponseEntity<?> putTrailer(@RequestBody Trailers newTrailer) {
+        Trailers trailer = trailersRepository.findById(newTrailer.getId())
+                .orElseThrow(() -> new RuntimeException(
+                        String.format("Cannot Find Trailer by ID %s", newTrailer.getId())));
+
+        trailer.setTruck(newTrailer.getTruck());
+        trailer.setCargo(newTrailer.getCargo());
+        trailer.setLocation(newTrailer.getLocation());
+
+        trailersRepository.save(trailer);
+        return ResponseEntity.ok(trailer);
+    }
+
+    @DeleteMapping(path = TrailersLinks.DELETE_TRAILER)
+    public ResponseEntity<?> deleteTruck(@RequestBody Trailers trailer) {
+        String id = trailer.getId();
+        trailersRepository.deleteById(id);
         return ResponseEntity.ok(id);
     }
 }
