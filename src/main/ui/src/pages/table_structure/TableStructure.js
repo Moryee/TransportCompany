@@ -161,7 +161,7 @@ function TableStructure(props) {
   return (
     <div className='data-table'>
       <ThemeProvider theme={theme}>
-        <Paper sx={{ marginLeft: '220px', overflow: 'hidden' }}>
+        <Paper sx={{ overflow: 'hidden' }}>
           <Toolbar>
             <Input
               className={classes.searchInput}
