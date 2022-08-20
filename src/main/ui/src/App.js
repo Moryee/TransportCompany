@@ -3,7 +3,7 @@ import './App.css';
 import { Navbar } from './components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Auth, Cargo, Trucks, ErrorPage } from './pages'
+import { Auth, ErrorPage, Cargo, Trucks, Drivers, Trailers } from './pages'
 
 import { restrict } from './service/AuthService';
 
@@ -17,7 +17,9 @@ function App() {
           <Route exact path='/auth' element={<Auth authType={''} setAccessRight={setAccessRight} />} />
           <Route path='/cargo' element={<Cargo accessRight={accessRight} />} />
           <Route path='/trucks' element={<Trucks accessRight={accessRight}/>} />
-
+          <Route path='/drivers' element={<Drivers accessRight={accessRight}/>} />
+          <Route path='/trailers' element={<Trailers accessRight={accessRight}/>} />
+          
           <Route path='*' element={<ErrorPage />} />
         </Routes>
       </Router>
