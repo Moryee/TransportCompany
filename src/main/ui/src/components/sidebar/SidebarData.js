@@ -12,14 +12,26 @@ export default function SidebarData() {
             cname: 'nav-text'
         },
         {
-            title: 'Вантажі',
+            title: 'Cargo',
             path: '/cargo',
             icon: <FaIcons.FaBuilding />,
             cname: 'nav-text'
         },
         {
-            title: 'Тягачі',
+            title: 'Trucks',
             path: '/trucks',
+            icon: <FaIcons.FaRoad />,
+            cname: 'nav-text'
+        },
+        {
+            title: 'Drivers',
+            path: '/drivers',
+            icon: <FaIcons.FaRoad />,
+            cname: 'nav-text'
+        },
+        {
+            title: 'Trailers',
+            path: '/trailers',
             icon: <FaIcons.FaRoad />,
             cname: 'nav-text'
         },

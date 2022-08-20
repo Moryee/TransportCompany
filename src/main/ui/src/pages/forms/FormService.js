@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import CargoForm from './CargoForm'
 import TruckForm from './TruckForm'
+import DriverForm from './DriverForm'
+import TrailerForm from './TrailerForm'
 
 export default function FormService(props) {
     function Error(tableName) {
@@ -17,6 +19,14 @@ export default function FormService(props) {
         case 'trucks':
             return (
                 <TruckForm addOrEdit={addOrEdit} recordForEdit={recordForEdit} />
+            )
+        case 'drivers':
+            return (
+                <DriverForm addOrEdit={addOrEdit} recordForEdit={recordForEdit}/>
+            )
+        case 'trailers':
+            return (
+                <TrailerForm addOrEdit={addOrEdit} recordForEdit={recordForEdit}/>
             )
         default:
             Error(tableName)
