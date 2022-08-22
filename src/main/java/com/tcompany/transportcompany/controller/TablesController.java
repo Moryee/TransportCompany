@@ -14,6 +14,7 @@ import com.tcompany.transportcompany.repository.DriversRepository;
 import com.tcompany.transportcompany.repository.TrailersRepository;
 import com.tcompany.transportcompany.repository.TrucksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -78,6 +79,16 @@ public class TablesController {
         logInfo("delete", "cargo");
         String id = cargo.getId();
         cargoRepository.deleteById(id);
+
+        try {
+            Trailers updTrailer = trailersRepository.findByCargoId(id).get(0);
+            updTrailer.setCargo(null);
+            trailersRepository.save(updTrailer);
+        }
+        catch (IndexOutOfBoundsException e) {
+            log.info("Method deleteCargo didn't find any relation");
+        }
+
         return ResponseEntity.ok(id);
     }
 
@@ -116,6 +127,15 @@ public class TablesController {
         String id = driver.getId();
         driversRepository.deleteById(id);
 
+        try {
+            Trucks updTruck = trucksRepository.findByDriverId(id).get(0);
+            updTruck.setDriver(null);
+            trucksRepository.save(updTruck);
+        }
+        catch (IndexOutOfBoundsException e) {
+            log.info("Method deleteDriver didn't find any relation");
+        }
+
         return ResponseEntity.ok(id);
     }
 
@@ -130,6 +150,12 @@ public class TablesController {
     @PostMapping(path = TrucksLinks.POST_TRUCK)
     public ResponseEntity<?> postTruck(@RequestBody Trucks truck) {
         logInfo("post", "trucks");
+
+        if (!trucksRepository.findByDriverId(truck.getDriver()).isEmpty()) {
+            log.warn("trucks already contain this DriverId");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         Trucks resource = trucksRepository.insert(truck);
         return ResponseEntity.ok(resource);
     }
@@ -154,6 +180,16 @@ public class TablesController {
         logInfo("delete", "trucks");
         String id = truck.getId();
         trucksRepository.deleteById(id);
+
+        try {
+            Trailers updTrailer = trailersRepository.findByTruckId(id).get(0);
+            updTrailer.setTruck(null);
+            trailersRepository.save(updTrailer);
+        }
+        catch (IndexOutOfBoundsException e) {
+            log.info("Method deleteTruck didn't find any relation");
+        }
+
         return ResponseEntity.ok(id);
     }
 
@@ -168,6 +204,13 @@ public class TablesController {
     @PostMapping(path = TrailersLinks.POST_TRAILER)
     public ResponseEntity<?> postTrailer(@RequestBody Trailers trailer) {
         logInfo("post", "trailers");
+
+        if (!trailersRepository.findByCargoId(trailer.getCargo()).isEmpty() ||
+            !trailersRepository.findByTruckId(trailer.getTruck()).isEmpty()) {
+            log.warn("trailers already contain this CargoId or TruckId");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         Trailers resource = trailersRepository.insert(trailer);
         return ResponseEntity.ok(resource);
     }
