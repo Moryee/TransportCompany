@@ -3,6 +3,7 @@ import { Grid, } from '@mui/material';
 import { Button, Checkbox, Input, RadioGroup, Select } from '../../components/controls';
 import { useForm, Form } from '../../components/useForm';
 
+import { getData } from '../../service/service';
 
 export const initialValues = {
     id: 0,
@@ -13,6 +14,28 @@ export const initialValues = {
 
 export default function TruckForm(props) {
     const { addOrEdit, recordForEdit } = props
+    const [trucks, setTrucks] = useState([])
+    const [drivers, setDrivers] = useState([])
+    const [availableDrivers, setAvailableDrivers] = useState([])
+
+    useEffect(() => {
+        getData(setTrucks, 'trucks')
+        getData(setDrivers, 'drivers')
+    }, [])
+    
+    useEffect(() => {
+        let result = []
+        drivers.forEach(driver => {
+            if(!trucks.some(t => t.driver == driver.id)) {
+                const newDict = {
+                    id: driver.id,
+                    title: `${driver.name} ${driver.surname}`,
+                }
+                result.push(newDict)
+            }
+        });
+        setAvailableDrivers(result)
+    }, [drivers, trucks])
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
@@ -68,11 +91,12 @@ export default function TruckForm(props) {
                     onChange={handleInputChange}
                     error={errors.model}
                 />
-                <Input
+                <Select
                     name="driver"
                     label="Driver"
                     value={values.driver}
                     onChange={handleInputChange}
+                    options={availableDrivers}
                     error={errors.driver}
                 />
                 <Input
