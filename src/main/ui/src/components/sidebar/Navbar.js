@@ -7,14 +7,14 @@ import SidebarData from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 
-import { restrict } from '../../service/AuthService';
+import { restrict, isAuthorised } from '../../service/AuthService';
 
 function Navbar(props) {
   const { accessRight } = props
   const [data] = useState(SidebarData());
 
-  const hideItemsOperator = ['Foremans', 'Workers']
-  const hideItemsOwner = ['Keys']
+  const hideItemsOperator = ['Drivers']
+  const hideItemsOwner = ['Users']
 
   return (
     <IconContext.Provider value={{ color: '#fff' }}>
@@ -30,12 +30,20 @@ function Navbar(props) {
           );
         })}
         <div className='profile'>
+          {!isAuthorised(accessRight) &&
+          <Link to='/login' className='logout-btn'>
+            <AiIcons.AiOutlineLogin />
+          </Link>}
+
+          {isAuthorised(accessRight) &&
           <Link to='/profile' className='profile-btn'>
             <FaIcons.FaUser />
-          </Link>
+          </Link>}
+
+          {isAuthorised(accessRight) &&
           <Link to='/logout' className='logout-btn'>
             <AiIcons.AiOutlineLogout />
-          </Link>
+          </Link>}
         </div>
       </nav>
     </IconContext.Provider>

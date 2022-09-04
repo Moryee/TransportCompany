@@ -4,12 +4,9 @@ import CargoForm from './CargoForm'
 import TruckForm from './TruckForm'
 import DriverForm from './DriverForm'
 import TrailerForm from './TrailerForm'
+import UserForm from './UserForm'
 
 export default function FormService(props) {
-    function Error(tableName) {
-        console.log(`\'${tableName}\' not found in FormService`)
-    }
-
     const { addOrEdit, recordForEdit, tableName } = props
     switch (tableName) {
         case 'cargo':
@@ -28,7 +25,11 @@ export default function FormService(props) {
             return (
                 <TrailerForm addOrEdit={addOrEdit} recordForEdit={recordForEdit}/>
             )
+        case 'users':
+            return (
+                <UserForm addOrEdit={addOrEdit} recordForEdit={recordForEdit}/>
+            )
         default:
-            Error(tableName)
+            console.log(`\'${tableName}\' not found in FormService`)
     }
 }

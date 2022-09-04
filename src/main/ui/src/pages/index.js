@@ -1,4 +1,6 @@
 import Auth from './Auth';
+import Users from './Users';
+import Profile from './Profile';
 import Cargo from './Cargo';
 import Trucks from './Trucks';
 import Drivers from './Drivers';
@@ -15,4 +17,6 @@ export {
     Trucks,
     Drivers,
     Trailers,
+    Users,
+    Profile,
 };

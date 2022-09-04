@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { insertData } from './service'
+import React from 'react'
+import { getLink } from './service'
 
 export const accessItems = [
     { id: 'none', value: 0 },
@@ -29,26 +29,29 @@ export function restrict(accessRight, required) {
     return false
 }
 
-export function AuthData() {
-    // const [isAuthorised, setIsAuthorised] = useState(false)
-    // const [accessRight, setAccessRight] = useState('user')
-    // return (accessRight, setAccessRight)
+export function isAuthorised(accessRight) {
+    if (accessRight != 'none') { return true }
+    return false
 }
 
-export function login(row, setAccessRight) {
-    // const { isAuthorised, setIsAuthorised, accessRight, setAccessRight } = AuthData()
-
+export function login(row, setAccessRight, setUsername) {
     setAccessRight(row.access_right)
+    setUsername(row.username)
+    console.log(`logged in with ${row.username}, ${row.access_right}`);
 }
 
-export function logout(setAccessRight) {
-    // const { isAuthorised, setIsAuthorised, accessRight, setAccessRight } = AuthData()
-
+export function logout(setAccessRight, setUsername) {
     setAccessRight('none')
+    setUsername('')
+    console.log(`logged out, access right is unauthorized`);
 }
 
-export function register(row, data, setData, setAccessRight) {
-    // const { isAuthorised, setIsAuthorised, accessRight, setAccessRight } = AuthData()
+export function register(row, setAccessRight, setUsername) {
     setAccessRight(row.access_right)
-    insertData(row, data, 'key', setData)
+    setUsername(row.username)
+    fetch(getLink('users', 'post'), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(row)
+    })
 }

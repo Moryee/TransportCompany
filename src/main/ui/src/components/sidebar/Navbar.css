@@ -17,7 +17,7 @@
   font-size: 15px;
 }
 
-a {
+.nav-menu a {
   color: white;
   cursor: pointer;
   text-decoration: none;

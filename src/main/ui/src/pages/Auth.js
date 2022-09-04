@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Grid, } from '@mui/material';
 import { Button, Input } from '../components/controls';
 import { useForm, Form } from '../components/useForm';
-
+import { Link } from 'react-router-dom';
 import { getData } from '../service/service';
+import './Pages.css';
 
-import { register, login } from '../service/AuthService';
+import { register, login, logout } from '../service/AuthService';
 
 const accessRightItems = [
     { id: 'user', title: 'User' },
@@ -14,39 +15,35 @@ const accessRightItems = [
     { id: 'owner', title: 'Owner' },
 ]
 
-// створити користувача із правами власника БД.
-// створити користувача із правами адміністратора БД.
-// створити користувача із правами оператора БД.
-// створити користувача із правами на перегляд даних таблиць.
-
-
 export const initialValues = {
     id: 0,
-    login: '',
+    username: '',
     password: '',
     access_right: 'user',
 }
 
 export default function Auth(props) {
-    const { authType, setAccessRight } = props
-    const { keys, setKeys} = useState()
+    const { authType, setAccessRight, setUsername } = props
+    const [keys, setKeys] = useState([])
 
+    useEffect(() => {
+        getData(setKeys, 'users')
+    }, [])
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        getData(setKeys, 'key')
-        let loginArray = keys.map((row) => { return row.login })
+        let loginArray = keys.map((row) => { return row.username })
 
-        if ('login' in fieldValues) {
-            if (!fieldValues.login)
-                temp.login = 'This field is required.'
+        if ('username' in fieldValues) {
+            if (!fieldValues.username)
+                temp.username = 'This field is required.'
             // else if ((/\d+/).test(fieldValues.floors_number))
             //     temp.floors_number = 'Floors number must be digital'
-            if (loginArray.includes(fieldValues.login)){
-              temp.login = 'This login is already taken'
+            if (loginArray.includes(fieldValues.username && authType == 'register')) {
+                temp.username = 'This username is already taken'
             }
             else
-                temp.floors_number = ''
+                temp.username = ''
         }
         // temp.fullName = fieldValues.fullName ? "" : "This field is required."
         setErrors({
@@ -68,46 +65,64 @@ export default function Auth(props) {
 
     const handleSubmit = e => {
         e.preventDefault()
-        if (validate()) {
-            if (authType == 'login') {
-              keys.map((row) => {
-                if (row.login == values.login) {
-                  if (row.password == values.password) {
-                    login(row, setAccessRight)
-                    return
-                  }
-                  else {
-                    console.log('incorrect password')
-                    return
-                  }
-                }
-              })
-              
-            }
-            else if (authType == 'register') {
-              register(values, keys, setKeys, setAccessRight)
-            }
-            else {
-              console.log(`cannot recognize \'${authType}\' in AuthPage`);
-            }
-            // addOrEdit(values, resetForm) // use another func
-            resetForm();
+
+        if (!validate()) {
+            console.log('invalid data');
+            return
         }
+        // if users dict is not initialized exit
+        if (keys.length == 0) { return }
+
+        console.log(authType);
+        if (authType == 'login') {
+            keys.map((row) => {
+                if (row.username == values.username) {
+                    if (row.password == values.password) {
+                        login(row, setAccessRight, setUsername)
+                        return
+                    }
+                    else {
+                        console.log('incorrect password')
+                        return
+                    }
+                }
+            })
+        }
+        else if (authType == 'register') {
+            register(values, setAccessRight, setUsername)
+        }
+        else {
+            console.log(`cannot recognize \'${authType}\' in AuthPage`);
+        }
+        // addOrEdit(values, resetForm) // use another func
+        resetForm();
     }
 
+    function titleForm(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    if (authType == 'logout') {
+        logout(setAccessRight, setUsername)
+        return (
+            <h1>Logged Out</h1>
+        )
+    }
     return (
-        <Form onSubmit={handleSubmit}>
+        <div className='body'>
+        <Form onSubmit={handleSubmit} className="auth-page">
+            <h1>{titleForm(authType)}</h1>
             <Grid container
                 direction={'column'}
                 rowGap={2}
                 sx={{ paddingLeft: '20px', paddingRight: '20px', paddingTop: '20px', paddingBottom: '20px' }}>
 
                 <Input
-                    name="login"
-                    label="Login"
-                    value={values.login}
+                    name="username"
+                    label="Username"
+                    value={values.username}
                     onChange={handleInputChange}
-                    error={errors.login}
+                    error={errors.username}
                 />
                 <Input
                     name="password"
@@ -126,7 +141,13 @@ export default function Auth(props) {
                         color="warning"
                         onClick={resetForm} />
                 </Grid>
+
+                <Link to='/register' className='register-btn'>
+                    REGISTER
+                </Link>
+
             </Grid>
         </Form>
+        </div>
     )
 }

@@ -218,16 +218,18 @@ function TableStructure(props) {
                           );
                         })}
                         <TableCell align='right'>
+                          {restrict(accessRight, 'operator') &&
                           <ActionButton
                             color="primary"
                             onClick={() => { openInPopup(row) }}>
                             <EditIcon fontSize="small" />
-                          </ActionButton>
+                          </ActionButton>}
+                          {restrict(accessRight, 'operator') && 
                           <ActionButton
                             color="secondary"
                             onClick={() => { removeData(row) }}>
                             <DeleteIcon fontSize="small" />
-                          </ActionButton>
+                          </ActionButton>}
                         </TableCell>
                       </TableRow>
                     );

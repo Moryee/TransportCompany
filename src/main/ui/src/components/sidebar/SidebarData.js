@@ -35,6 +35,12 @@ export default function SidebarData() {
             cname: 'link'
         },
         {
+            title: 'Users',
+            path: '/users',
+            icon: <FaIcons.FaUsers />,
+            cname: 'link'
+        },
+        {
             title: 'About us',
             path: '/info',
             icon: <FaIcons.FaRoad />,

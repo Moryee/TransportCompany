@@ -1,18 +1,9 @@
 package com.tcompany.transportcompany.controller;
 
 
-import com.tcompany.transportcompany.entity.Cargo;
-import com.tcompany.transportcompany.entity.Drivers;
-import com.tcompany.transportcompany.entity.Trailers;
-import com.tcompany.transportcompany.entity.Trucks;
-import com.tcompany.transportcompany.links.CargoLinks;
-import com.tcompany.transportcompany.links.DriversLinks;
-import com.tcompany.transportcompany.links.TrailersLinks;
-import com.tcompany.transportcompany.links.TrucksLinks;
-import com.tcompany.transportcompany.repository.CargoRepository;
-import com.tcompany.transportcompany.repository.DriversRepository;
-import com.tcompany.transportcompany.repository.TrailersRepository;
-import com.tcompany.transportcompany.repository.TrucksRepository;
+import com.tcompany.transportcompany.entity.*;
+import com.tcompany.transportcompany.links.*;
+import com.tcompany.transportcompany.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +29,8 @@ public class TablesController {
     private TrucksRepository trucksRepository;
     @Autowired
     private TrailersRepository trailersRepository;
+    @Autowired
+    private UsersRepository usersRepository;
 
     private void logInfo(String method, String tableName) {
         log.info("TablesController: " + method.toUpperCase(Locale.ROOT) + " " + tableName);
@@ -235,6 +228,50 @@ public class TablesController {
         logInfo("delete", "trailers");
         String id = trailer.getId();
         trailersRepository.deleteById(id);
+        return ResponseEntity.ok(id);
+    }
+
+    // users
+    @GetMapping(path = UsersLinks.GET_USERS)
+    public ResponseEntity<?> getUsers() {
+        logInfo("get", "users");
+        List<Users> resource = usersRepository.findAll();
+        return ResponseEntity.ok(resource);
+    }
+
+    @PostMapping(path = UsersLinks.POST_USERS)
+    public ResponseEntity<?> postUser(@RequestBody Users user) {
+        logInfo("post", "users");
+
+        if (!usersRepository.findByUsername(user.getUsername()).isEmpty()) {
+            log.warn("user with this username already exists");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        Users resource = usersRepository.insert(user);
+        return ResponseEntity.ok(resource);
+    }
+
+    @PutMapping(path = UsersLinks.PUT_USER)
+    public ResponseEntity<?> putUser(@RequestBody Users newUser) {
+        logInfo("put", "users");
+        Users user = usersRepository.findById(newUser.getId())
+                .orElseThrow(() -> new RuntimeException(
+                        String.format("Cannot Find User by ID %s", newUser.getId())));
+
+        user.setUsername(newUser.getUsername());
+        user.setPassword(newUser.getPassword());
+        user.setAccess_right(newUser.getAccess_right());
+
+        usersRepository.save(user);
+        return ResponseEntity.ok(user);
+    }
+
+    @DeleteMapping(path = UsersLinks.DELETE_USER)
+    public ResponseEntity<?> deleteUser(@RequestBody Users user) {
+        logInfo("delete", "users");
+        String id = user.getId();
+        usersRepository.deleteById(id);
         return ResponseEntity.ok(id);
     }
 }

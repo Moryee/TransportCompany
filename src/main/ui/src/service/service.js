@@ -1,6 +1,6 @@
 const link = 'http://localhost:65432/api/'
 
-function getLink(tableName, operation) {
+export function getLink(tableName, operation) {
     //example: 'http://localhost:8080/api/building/update'
     switch (operation) {
         case 'get':
