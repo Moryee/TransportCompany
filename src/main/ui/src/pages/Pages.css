@@ -1,0 +1,18 @@
+.auth-page a {
+    color: black;
+    text-decoration: none;
+    margin: auto;
+}
+
+.auth-page h1 {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.profile-page {
+    padding: 20px;
+}
+
+.profile-page h1 {
+    margin-bottom: 10px;
+}
