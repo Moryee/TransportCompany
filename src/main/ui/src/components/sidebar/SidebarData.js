@@ -6,7 +6,7 @@ export default function SidebarData() {
     return [
         {
             title: 'T.COMP',
-            path: '/',
+            path: '/home',
             icon: <AiIcons.AiFillHome />,
             cname: 'logo'
         },
