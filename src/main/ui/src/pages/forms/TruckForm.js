@@ -22,11 +22,11 @@ export default function TruckForm(props) {
         getData(setTrucks, 'trucks')
         getData(setDrivers, 'drivers')
     }, [])
-    
+
     useEffect(() => {
         let result = []
         drivers.forEach(driver => {
-            if(!trucks.some(t => t.driver == driver.id)) {
+            if (!trucks.some(t => t.driver == driver.id)) {
                 const newDict = {
                     id: driver.id,
                     title: `${driver.name} ${driver.surname}`,
@@ -39,11 +39,18 @@ export default function TruckForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('floors_number' in fieldValues) {
-            if (!fieldValues.floors_number)
-                temp.floors_number = 'This field is required.'
+        if ('model' in fieldValues) {
+            if (!fieldValues.model)
+                temp.model = 'This field is required'
             else
-                temp.floors_number = ''
+                temp.model = ''
+        }
+
+        if ('location' in fieldValues) {
+            if (!fieldValues.location)
+                temp.location = 'This field is required'
+            else
+                temp.location = ''
         }
         setErrors({
             ...temp

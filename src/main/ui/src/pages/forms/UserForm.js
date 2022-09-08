@@ -22,11 +22,25 @@ export default function UserForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('floors_number' in fieldValues) {
-            if (!fieldValues.floors_number)
-                temp.floors_number = 'This field is required.'
+        if ('username' in fieldValues) {
+            if (!fieldValues.username)
+                temp.username = 'This field is required'
             else
-                temp.floors_number = ''
+                temp.username = ''
+        }
+
+        if ('password' in fieldValues) {
+            if (!fieldValues.password)
+                temp.password = 'This field is required'
+            else
+                temp.password = ''
+        }
+
+        if ('access_right' in fieldValues) {
+            if (!fieldValues.access_right)
+                temp.access_right = 'This field is required'
+            else
+                temp.access_right = ''
         }
         setErrors({
             ...temp
