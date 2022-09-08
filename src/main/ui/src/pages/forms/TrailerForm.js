@@ -58,11 +58,11 @@ export default function TruckForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('floors_number' in fieldValues) {
-            if (!fieldValues.floors_number)
-                temp.floors_number = 'This field is required.'
+        if ('location' in fieldValues) {
+            if (!fieldValues.location)
+                temp.location = 'This field is required'
             else
-                temp.floors_number = ''
+                temp.location = ''
         }
         setErrors({
             ...temp

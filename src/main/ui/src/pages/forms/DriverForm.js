@@ -14,11 +14,18 @@ export default function CargoForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('floors_number' in fieldValues) {
-            if (!fieldValues.floors_number)
-                temp.floors_number = 'This field is required.'
+        if ('name' in fieldValues) {
+            if (!fieldValues.name)
+                temp.name = 'This field is required'
             else
-                temp.floors_number = ''
+                temp.name = ''
+        }
+
+        if ('surname' in fieldValues) {
+            if (!fieldValues.surname)
+                temp.surname = 'This field is required'
+            else
+                temp.surname = ''
         }
         setErrors({
             ...temp

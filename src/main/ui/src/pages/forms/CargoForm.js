@@ -16,11 +16,27 @@ export default function CargoForm(props) {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
-        if ('floors_number' in fieldValues) {
-            if (!fieldValues.floors_number)
-                temp.floors_number = 'This field is required.'
+        if ('type' in fieldValues) {
+            if (!fieldValues.type)
+                temp.type = 'This field is required.'
             else
                 temp.floors_number = ''
+        }
+
+        if ('weight' in fieldValues) {
+            if (!fieldValues.weight)
+                temp.weight = 'This field is required'
+            else if (isNaN(parseInt(fieldValues.weight)))
+                temp.weight = 'This value must be a number'
+            else
+                temp.weight = ''
+        }
+
+        if ('location' in fieldValues) {
+            if (!fieldValues.location)
+                temp.location = 'This field is required'
+            else
+                temp.location = ''
         }
         setErrors({
             ...temp
