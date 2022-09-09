@@ -13,8 +13,9 @@
     background-position: right -150px;
 }
 
-.home-page .text1, .home-page .text2 {
-    font-size: 50px;
+.home-page .text1, .home-page .text2, .home-page .text3 {
+    font-family: 'Play', sans-serif;
+    font-size: 55px;
     font-weight:700;
 }
 
@@ -22,20 +23,28 @@
     width: fit-content;
     position: absolute;
     top: 150px;
-    left: 500px
+    left: 500px;
+}
+
+.home-page .text1 {
+    position: absolute;
+    width: 835px;
+    left: 230px;
+    top: 65px;
 }
 
 .home-page .text2 {
     position: absolute;
-    left: 360px;
+    width: 435px;
+    left: 530px;
+    top: 135px;
 }
 
 .home-page .text3 {
-    font-weight: 500;
-
     position: absolute;
-    left: 360px;
-    top: 130px;
+    width: 440px;
+    left: 645px;
+    top: 205px;
 }
 
 .about-us-page h1 {
@@ -63,4 +72,13 @@
 
 .profile-page, .auth-page, .error-page, .about-us-page {
     background-color: white;
+}
+
+.text4{
+    position: absolute;
+    font-family: 'Play', sans-serif;
+    font-size: 25px;
+    width: 600px;
+    left: 540px;
+    top: 330px;
 }
