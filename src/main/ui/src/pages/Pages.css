@@ -5,12 +5,12 @@
     height: 100%;
 
     color: white;
-
+    background-position: center center;
     position: relative;
     background-repeat: no-repeat;
-    background-attachment:fixed;
-    background-size: 100%;
-    background-position: right -150px;
+    background-attachment:local;
+    background-size: cover;
+    
 }
 
 .home-page .text1, .home-page .text2, .home-page .text3 {
@@ -150,4 +150,27 @@
   
   .social__icon:hover:after{
     transform: translate(0);
-  }
+}
+
+
+.container {
+  max-width: 50% !important;
+}
+
+.btn {
+  width: 100%;
+}
+
+.alert {
+    position: fixed !important;
+    top: 10px;
+    left: 50px;
+    right: 50px;
+    text-align: center;
+    transform: translateY(-150%);
+    transition: .6s;
+}
+
+.alert.active {
+    transform: translateY(0); 
+}
