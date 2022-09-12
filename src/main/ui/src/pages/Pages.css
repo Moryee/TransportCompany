@@ -88,7 +88,7 @@
   .social{
     position: absolute;
     display:flex;
-    top: 730px;
+    top: 780px;
     left: 40px;
     
   }
@@ -163,16 +163,16 @@
 }
 
 .alert {
-    background-color: black;
+    background-color:  #2f2f2f;;
     border-radius: 20px;
     width: 150px;
     height: 20px;
     padding: 2px;
     text-align: center;
     position: fixed !important;
-    top: 785px;
+    top: 825px;
     left: 190px;
-    opacity: 0;
+    opacity: 0; 
     transform: translateY(+150%);
     transition: .6s;
 }
