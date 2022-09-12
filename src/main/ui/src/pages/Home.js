@@ -19,7 +19,7 @@ function Home() {
                 <a class="social__icon facebook " href="https://www.facebook.com/groups/221656066288460">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <div class="alert alert-success" id="successMessage">Текст скопирован!</div>
+                <div class="alert alert-success" id="successMessage">Текст скопійовано!</div>
 
                 <button value="t.comp@gmail.com" id="clickboardInput" class="social__icon envelope" >
                     <i class="fas fa-envelope"></i>

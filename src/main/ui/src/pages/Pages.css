@@ -107,6 +107,7 @@
     transition: all 0.5s ease;
     position: relative;
     overflow:hidden;
+    border: 0px;
   }
   
   .social__icon i {
@@ -162,15 +163,21 @@
 }
 
 .alert {
-    position: fixed !important;
-    top: 10px;
-    left: 50px;
-    right: 50px;
+    background-color: black;
+    border-radius: 20px;
+    width: 150px;
+    height: 20px;
+    padding: 2px;
     text-align: center;
-    transform: translateY(-150%);
+    position: fixed !important;
+    top: 785px;
+    left: 190px;
+    opacity: 0;
+    transform: translateY(+150%);
     transition: .6s;
 }
 
 .alert.active {
     transform: translateY(0); 
+    opacity: 1;
 }
