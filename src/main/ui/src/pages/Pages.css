@@ -171,14 +171,13 @@
 .about-us-page-text{
 width:800px;
 height: 500px;
-background-color: black;
 position: absolute;
 top: 5%;
 left: 5%;
-font-size: 26px;
+font-size: 32px;
 font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-text-align: center;
-padding-top: 50px;
+padding-top: 100px;
+text-align: justify;
 }
 .about-us-page-slider{
 width: 500px;
@@ -186,14 +185,14 @@ height: 500px;
 position:absolute;
 left: 60%;
 top: 5%;
-background-color: black;
+
 }
 .about-us-page-partners{
 width: 1700px;
-height: 100px;
+height: 140px;
 background-color: white;
 position: absolute;
-top:85%;
+top:80%;
 left: 5%;
 border-radius: 20px;
 }
@@ -221,7 +220,7 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding: 2px;
     text-align: center;
     position: fixed !important;
-    top: 70%;
+    top: 84%;
     left: 190px;
     opacity: 0; 
     transform: translateY(+150%);
@@ -235,20 +234,25 @@ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 
 #slider{
-  width: 490px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   border: 5px solid red;
   margin: 50px auto;
   overflow: hidden;
+  border-radius: 50px;
 }
 #polosa{
-  width: 2450px;/*кількість картинок помножена на їх ширину*/
+  width: 1500px;/*кількість картинок помножена на їх ширину*/
   position: relative;
   left: 0px;
   transition: all ease 1s;
+  
 }
 #polosa img{
   float: left;
+  height: 500px;
+  width: 500px;
+  
 }
 #polosa::after{
   content: "";

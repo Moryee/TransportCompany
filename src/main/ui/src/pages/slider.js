@@ -5,8 +5,8 @@ var timer;
 function autoSlider(){
     timer = setTimeout(function(){
         var polosa = document.getElementById('polosa');
-        left = left - 490;/*цифрове значеннярозмір картинки*/
-        if(left < -1960)
+        left = left - 500;/*цифрове значеннярозмір картинки*/
+        if(left < -1000)
         {
             left = 0;
             clearTimeout(timer);
