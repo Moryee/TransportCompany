@@ -107,6 +107,7 @@
     position: relative;
     overflow:hidden;
     border: 0px;
+    z-index: 1;
 }
   
 .social__icon i {
@@ -182,7 +183,7 @@ text-align: justify;
 width: 500px;
 height: 500px;
 position:absolute;
-left: 60%;
+left: 1200px;
 top: 5%;
 
 }
@@ -222,24 +223,24 @@ font-family: 'Tomorrow', sans-serif;
   position: fixed !important;
   top: 84%;
   left: 190px;
-  opacity: 1; 
+  opacity: 0; 
   transform: translateY(+150%);
   transition: .6s;
 }
 
 .alert1 {
-  background-color:  #eb0000;;
+  background-color:  #2f2f2f;;
   border-radius: 20px;
   width: 110px;
   height: 40px;
   padding: 2px;
   text-align: center;
   position: fixed !important;
-  top: 80%;
+  top: 82%;
   left: 23px;
-  opacity: 1; 
+  opacity: 0; 
   z-index: 0;
-  transform: translateY(+160%);
+  transform: translateY(+180%);
   transition: .6s;
 }
 
@@ -256,7 +257,7 @@ opacity: 1;
 #slider{
 width: 500px;
 height: 500px;
-border: 5px solid red;
+border: 5px solid gray;
 margin: 50px auto;
 overflow: hidden;
 border-radius: 50px;

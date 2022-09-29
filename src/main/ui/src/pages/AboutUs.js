@@ -1,5 +1,4 @@
 import React from 'react';
-import './Copy'
 import './slider'
 function AboutUs() {
     return (

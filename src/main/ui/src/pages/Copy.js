@@ -8,3 +8,4 @@ clickboardInput.onclick = function () {
     
 }
 }, 1000); //Не працює копіювання з 1 разу
+
