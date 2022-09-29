@@ -188,7 +188,7 @@ top: 5%;
 
 }
 .about-us-page-partners{
-width: calc(200px + 1500 * (100vw / 1920));
+width: 1700px;
 height: 145px;
 background-color: white;
 position: absolute;
