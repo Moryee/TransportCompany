@@ -1,7 +1,6 @@
 setTimeout(() => {
     let clickboardInput = document.getElementById('clickboardInput')
     let successMessage = document.getElementById('successMessage')
-    console.log(clickboardInput)
 clickboardInput.onclick = function () {
     navigator.clipboard.writeText(clickboardInput.value)
     successMessage.classList.add('active')

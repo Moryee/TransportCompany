@@ -20,7 +20,20 @@ function AboutUs() {
             </div>
             <div className='about-us-page-partners'>
                 <h1>Partners</h1>
-                
+                <img src="./PartnersLogo\Epc.png" alt="1" />
+                <img src="./PartnersLogo\Eva.png" alt="1" />
+                <img src="./PartnersLogo\Atb.png" alt="1" />
+                <img src="./PartnersLogo\Shabo.png" alt="1" />
+                <img src="./PartnersLogo\MXP.png" alt="1" />
+                <img src="./PartnersLogo\Metro.png" alt="1" />
+                <img src="./PartnersLogo\Prom.png" alt="1" />
+                <img src="./PartnersLogo\Ab.png" alt="1" />
+                <img src="./PartnersLogo\Optk.png" alt="1" />
+                <img src="./PartnersLogo\Dtek.png" alt="1" />
+                <img src="./PartnersLogo\Kernel.png" alt="1" />
+                <img src="./PartnersLogo\Arc.png" alt="1" />
+                <img src="./PartnersLogo\Pet.png" alt="1" />
+                <img src="./PartnersLogo\Obolon.png" alt="1" />
                 </div>
         </div>
     );
