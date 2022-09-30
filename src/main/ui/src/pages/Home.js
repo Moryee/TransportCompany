@@ -1,6 +1,6 @@
 import React from 'react';
-import "./Copy"
-import "./CopyPhone"
+import Copy from './Copy';
+import CopyPhone from './CopyPhone';
 function Home() {
     return (
         <div className='home-page'>
@@ -33,7 +33,10 @@ function Home() {
                 </a> 
 
                 </div>
-
+                <>
+                <Copy/>
+                <CopyPhone/>
+                </>
         </div>
     );
 }

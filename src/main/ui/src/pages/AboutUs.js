@@ -1,5 +1,5 @@
 import React from 'react';
-import './slider'
+import AutoSlider from './slider';
 function AboutUs() {
     return (
         <div className='about-us-page'>
@@ -34,6 +34,9 @@ function AboutUs() {
                 <img src="./PartnersLogo\Pet.png" alt="1" />
                 <img src="./PartnersLogo\Obolon.png" alt="1" />
                 </div>
+                <>
+                <AutoSlider/>
+                </>
         </div>
     );
 }
